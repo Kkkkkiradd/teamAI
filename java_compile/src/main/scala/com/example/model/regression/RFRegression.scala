@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component
 
 /**
   * Created by twb on 2017/5/2.
+  * 随机森林（RF）回归
   */
 @Component
 class RFRegression extends SparkConnect{

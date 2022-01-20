@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component
 import org.springframework.beans.factory.annotation.Autowired
 /**
   * Created by tangwb on 2017/3/24.
+  * 梯度下降决策树
   */
 @Component
 class GDBTClassification extends SparkConnect{

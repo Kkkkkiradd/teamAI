@@ -10,6 +10,7 @@ import collection.JavaConverters._
 
 /**
   * Created by lucas on 2016/12/1.
+  * Logistic回归
   */
 @Component
 class LRClassification extends SparkConnect{

@@ -286,7 +286,7 @@
                 <version>2.15.2</version>
                 <executions>
                     <execution>
-                        <id>scala-compile</id>
+                        <id>scala-compile-first</id>
                         <goals>
                             <goal>compile</goal>
                         </goals>
@@ -296,12 +296,6 @@
                                 <include>**/*.scala</include>
                             </includes>
                         </configuration>
-                    </execution>
-                    <execution>
-                        <id>scala-test-compile</id>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
