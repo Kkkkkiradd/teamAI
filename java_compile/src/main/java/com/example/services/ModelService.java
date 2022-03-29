@@ -21,6 +21,7 @@ import com.example.services.pojo.DLModelPojo;
 import com.example.services.pojo.ModelPojo;
 import com.example.services.pojo.ModelTypePojo;
 import com.example.util.Json2Object;
+import com.example.util.Object2Json;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -234,6 +235,7 @@ public class ModelService {
      */
     public boolean updataResOfModel(int modelId, HashMap<String, String> resOfModel, Object model){
         Model modelOfGet =  modelDao.findById(modelId);
+        log.info("\n\nmodel:"+JSON.toJSONString(model)+"\n\n");
         //T.B.D.
         //modelOfGet.setModel(model);
         modelOfGet.setResOfModel(JSON.toJSONString(resOfModel));
