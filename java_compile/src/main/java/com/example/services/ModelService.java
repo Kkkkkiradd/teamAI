@@ -238,7 +238,7 @@ public class ModelService {
         //modelOfGet.setModel(model);
         modelOfGet.setResOfModel(JSON.toJSONString(resOfModel));
         modelOfGet.setTrained(true);
-
+        log.info("\n\nstore model result: "+modelOfGet.getResOfModel());
         val modelObject = modelDao.save(modelOfGet);
         if(modelObject!=null){
             return true;
@@ -263,7 +263,7 @@ public class ModelService {
         ).collect(Collectors.toList());
 
         //1. transfer file to libsvm
-        log.info("Transfer to LibSVM...");
+        log.info("\n\nTransfer to LibSVM...\n\n");
         String keyFeature = features.get(features.size()-1);
         features.remove(features.size()-1);
         val featureNum = features.size();
@@ -284,8 +284,10 @@ public class ModelService {
                             Integer.parseInt(modelArguments.get("MaxIter")),
                             Float.parseFloat(modelArguments.get("RegParam")),
                             Float.parseFloat(modelArguments.get("ElasticNetParam")));
+                    log.info("\n\nstore Model result\n\n");
                     val lrRst = lrClassification.lrResult(lrModel);
 
+                    log.info("\n\nupdate result of model\n\n");
                     rsl = updataResOfModel(modelId, lrRst, lrModel);
                     break;
                 case "DecisionTree":

@@ -41,6 +41,8 @@ class DTClassification extends SparkConnect{
 
     // Load the data stored in LIBSVM format as a DataFrame.
     val data = sparkSession.read.format("libsvm").load(libsvmFile)
+    log.info("\n\nhas getten data\n\n")
+
     data.show()
     // Index labels, adding metadata to the label column.
     // Fit on whole dataset to include all labels in index.
@@ -57,10 +59,12 @@ class DTClassification extends SparkConnect{
       .fit(data)
 
     data.show()
+    log.info("\n\n data split\n\n")
     // Split the data into training and test sets (30% held out for testing).
     val Array(trainingSet, testSet) = data.randomSplit(Array(trainingSetOccupy, 1 - trainingSetOccupy))
     testData = testSet
 
+    log.info("\n\nready to train\n\n")
     // Train a DecisionTree model.
     val dt = new DecisionTreeClassifier()
       .setLabelCol("indexedLabel")
@@ -103,14 +107,15 @@ class DTClassification extends SparkConnect{
 
     val weightedRecall = evaluator.setMetricName("weightedRecall").evaluate(predictions);
     val accuracy = evaluator.setMetricName("accuracy").evaluate(predictions)
-
-    println("Test Error = " + (1.0 - accuracy))
+    //println("Test Error = " + (1.0 - accuracy))
+    log.info("\n\nTest Error = " + (1.0 - accuracy));
     val weightedPrecision = evaluator.setMetricName("weightedPrecision").evaluate(predictions);
 
     val f1 = evaluator.setMetricName("f1").evaluate(predictions);
 
     val treeModel = pipelineModel.stages(2).asInstanceOf[DecisionTreeClassificationModel]
-    println("Learned classification tree model:\n" + treeModel.toDebugString)
+    //println("Learned classification tree model:\n" + treeModel.toDebugString)
+    log.info("\n\nLearned classification tree model:\n" + treeModel.toDebugString);
 
     rslMap.put("Accuracy: ", accuracy.toString)
     rslMap.put("weightedPrecision", weightedPrecision.toString)

@@ -181,6 +181,9 @@ public class FileService {
                 configDao.delete(configDao.findById(config.getId()));
             }
         }
+        //这里之前有bug需要在hdfs中删除文件
+        String fileLoc = fileInfoDao.findById(fileId).getLocation();
+        hdfsDao.deleteFileInHdfs(fileLoc, true);
         fileInfoDao.delete(fileInfo);
         return true;
     }
